@@ -1,0 +1,39 @@
+clc;
+clear all;
+x=[1,2,3,4];
+N=10;
+if N>length(x)
+x=[x zeros(1,N-length(x))];
+end
+disp(x)
+Xk=zeros(1,N);
+for k=0:N-1
+for n=0:N-1
+Xk(k+1)=Xk(k+1)+x(n+1)*exp(((-1i)*2*pi*k*n)/N);
+end
+end
+disp('displaying DFT of input sequence');
+disp(Xk);
+k=length(Xk);
+mag=abs(Xk);
+phase=angle(Xk*(180/pi));
+subplot(2,2);
+stem(1:length(x),x);
+xlabel('n');
+ylabel('x(n)');
+title('input sequence');
+subplot(2,2);
+stem(1:k,Xk);
+xlabel('k');
+ylabel('x(k)');
+title('DFT sequence');
+subplot(2,2,3);
+stem(1:k,mag);
+xlabel('k');
+ylabel('magnitude');
+title('magnitude sequence');
+subplot(2,2,4);
+stem(1:k,phase);
+xlabel('k');
+ylabel('angle');
+title('phase sequence');
